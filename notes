@@ -1,0 +1,21 @@
+Setup sdmp, sdmp-modules, sdmp-schemas dbs.  sdmp appserver.
+
+> run the insert test locally, fastest that way.
+
+
+then
+
+
+
+> Insert modules
+
+~/mlcp/bin/mlcp.sh import -host localhost -port 8000 -username admin -password admin -input_file_path ./modules -mode local -database sdmp-modules -output_uri_replace "/Users/chamlin/git/sdmp/modules,''"
+
+
+> run the insert-templates vs sdmp db/appserver.
+
+> Insert dump
+
+~/mlcp/bin/mlcp.sh import -host localhost -port 8000 -username admin -password admin -input_file_path ./Support-Dump/ -mode local -output_collections xyz-slow -database sdmp
+
+

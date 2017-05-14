@@ -8,12 +8,20 @@
     <context>/fs:forest-status</context>
     <vars>
         <var>
-            <name>F</name>
-            <val>xs:string ('http://marklogic.com/sdmp/')</val>
+            <name>P</name>
+            <val>xs:string ('http://marklogic.com/sdmp/forest')</val>
+        </var>        
+        <var>
+            <name>PSLASH</name>
+            <val>xs:string (fn:concat ($P, '/'))</val>
+        </var>
+        <var>
+            <name>PSHARP</name>
+            <val>xs:string (fn:concat ($P, '#'))</val>
         </var>
         <var>
             <name>FIRI</name>
-            <val>sem:iri (fn:concat ('http://marklogic.com/sdmp/', '#', fs:forest-id))</val>
+            <val>sem:iri (fn:concat ($PSHARP, fs:forest-id))</val>
         </var>
     </vars>
     <triples>
@@ -22,10 +30,10 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri('a')</val>
+                <val>sem:iri('http://www.w3.org/2000/01/rdf-schema#a')</val>
             </predicate>
             <object>
-                <val>sem:iri('http://marklogic.com/sdmp/forest')</val>
+                <val>sem:iri($P)</val>
             </object>
         </triple>
         <triple>
@@ -33,10 +41,210 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($F||'forest-name')</val>
+                <val>sem:iri($PSLASH||'forest-name')</val>
             </predicate>
             <object>
                 <val>xs:string(fs:forest-name)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'forest-id')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:forest-id)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'host-id')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:host-id)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'state')</val>
+            </predicate>
+            <object>
+                <val>xs:string(fs:state)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'enabled')</val>
+            </predicate>
+            <object>
+                <val>xs:boolean(fs:enabled)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'availability')</val>
+            </predicate>
+            <object>
+                <val>xs:string(fs:availability)</val>
+                <invalid-values>ignore</invalid-values>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'updates-allowed')</val>
+            </predicate>
+            <object>
+                <val>xs:string(fs:updates-allowed)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'rebalancer-enable')</val>
+            </predicate>
+            <object>
+                <val>xs:boolean(fs:rebalancer-enable)</val>
+                <invalid-values>ignore</invalid-values>                
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'master-forest')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:master-forest)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'current-master-forest')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:current-master-forest)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'current-master-precise-time')</val>
+            </predicate>
+            <object>
+                <val>xs:dateTime(fs:current-master-precise-time)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'current-master-fsn')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:current-master-fsn)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'database-id')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:database-id)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'last-state-change')</val>
+            </predicate>
+            <object>
+                <val>xs:dateTime(fs:last-state-change)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'nonblocking-timestamp')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:nonblocking-timestamp)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'data-dir')</val>
+            </predicate>
+            <object>
+                <val>xs:string(fs:data-dir)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'journals-size')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:journals-size)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'large-data-size')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:large-data-size)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$FIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($PSLASH||'orphaned-binaries')</val>
+            </predicate>
+            <object>
+                <val>xs:unsignedLong(fs:orphaned-binaries)</val>
             </object>
         </triple>
     </triples>
@@ -45,9 +253,22 @@
             <context>fs:stands/fs:stand</context>
             <vars>
                 <var>
-                    <name>SIRI</name>
-                    <val>sem:iri (fn:concat ('http://marklogic.com/sdmp/stand', '#', fs:stand-id))</val>
+                    <name>P</name>
+                    <val>xs:string ('http://marklogic.com/sdmp/stand')</val>
+                </var>        
+                <var>
+                    <name>PSLASH</name>
+                    <val>xs:string (fn:concat ($P, '/'))</val>
                 </var>
+                <var>
+                    <name>PSHARP</name>
+                    <val>xs:string (fn:concat ($P, '#'))</val>
+                </var>
+                <var>
+                    <name>SIRI</name>
+                    <val>sem:iri (fn:concat ($PSHARP, fs:stand-id))</val>
+                </var>
+                
             </vars>
             <triples>
                 <triple>
@@ -55,21 +276,21 @@
                         <val>$SIRI</val>
                     </subject>
                     <predicate>
-                        <val>sem:iri('a')</val>
+                        <val>sem:iri('http://www.w3.org/2000/01/rdf-schema#a')</val>
                     </predicate>
                     <object>
-                        <val>sem:iri('http://marklogic.com/sdmp/stand')</val>
+                        <val>sem:iri($P)</val>
                     </object>
-                </triple>                
+                </triple>
                 <triple>
                     <subject>
-                        <val>$SIRI</val>
+                        <val>$FIRI</val>
                     </subject>
                     <predicate>
-                        <val>sem:iri($F||'stand-id')</val>
+                        <val>sem:iri('http://marklogic.com/sdmp/forest/has-stand')</val>
                     </predicate>
                     <object>
-                        <val>xs:string(fs:stand-id)</val>
+                        <val>$SIRI</val>
                     </object>
                 </triple>
                 <triple>
@@ -77,7 +298,18 @@
                         <val>$SIRI</val>
                     </subject>
                     <predicate>
-                        <val>sem:iri($F||'path')</val>
+                        <val>sem:iri($PSLASH||'stand-id')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:stand-id)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'path')</val>
                     </predicate>
                     <object>
                         <val>xs:string(fs:path)</val>
@@ -88,10 +320,240 @@
                         <val>$SIRI</val>
                     </subject>
                     <predicate>
-                        <val>sem:iri($F||'stand-kind')</val>
+                        <val>sem:iri($PSLASH||'is-fast')</val>
                     </predicate>
                     <object>
-                        <val>xs:string(fs:stand-kind)</val>
+                        <val>xs:boolean(fs:is-fast)</val>
+                        <invalid-values>ignore</invalid-values>  
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'label-version')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:label-version)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'disk-size')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:disk-size)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'memory-size')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:memory-size)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'list-cache-hits')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:list-cache-hits)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'list-cache-misses')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:list-cache-misses)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'list-cache-hit-rate')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:list-cache-hit-rate)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'list-cache-miss-rate')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:list-cache-miss-rate)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'compressed-tree-cache-hits')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:compressed-tree-cache-hits)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'compressed-tree-cache-misses')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:compressed-tree-cache-misses)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'compressed-tree-cache-hit-rate')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:float(fs:compressed-tree-cache-hit-rate)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'obsolete')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:boolean(fs:obsolete)</val>
+                        <invalid-values>ignore</invalid-values>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'compressed-tree-cache-miss-rate')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:float(fs:compressed-tree-cache-miss-rate)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'triple-cache-hits')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:triple-cache-hits)</val>
+                        <invalid-values>ignore</invalid-values>  
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'triple-cache-misses')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:triple-cache-misses)</val>
+                        <invalid-values>ignore</invalid-values>                          
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'triple-cache-hit-rate')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:float(fs:triple-cache-hit-rate)</val>
+                        <invalid-values>ignore</invalid-values>                          
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'triple-cache-miss-rate')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:float(fs:triple-cache-miss-rate)</val>
+                        <invalid-values>ignore</invalid-values>                          
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'triple-value-cache-hits')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:triple-value-cache-hits)</val>
+                        <invalid-values>ignore</invalid-values>                          
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'triple-value-cache-misses')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:triple-value-cache-misses)</val>
+                        <invalid-values>ignore</invalid-values>                          
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'triple-value-cache-hit-rate')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:triple-value-cache-hit-rate)</val>
+                        <invalid-values>ignore</invalid-values>                          
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'triple-value-cache-miss-rate')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:triple-value-cache-miss-rate)</val>
+                        <invalid-values>ignore</invalid-values>                          
                     </object>
                 </triple>
             </triples>
