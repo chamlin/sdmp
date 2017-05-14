@@ -267,8 +267,7 @@
                 <var>
                     <name>SIRI</name>
                     <val>sem:iri (fn:concat ($PSHARP, fs:stand-id))</val>
-                </var>
-                
+                </var>              
             </vars>
             <triples>
                 <triple>
