@@ -557,5 +557,106 @@
                 </triple>
             </triples>
         </template>
+            <template>
+            <context>fs:unclosed-stands/fs:unclosed-stand</context>
+            <vars>
+                <var>
+                    <name>P</name>
+                    <val>xs:string ('http://marklogic.com/sdmp/stand')</val>
+                </var>        
+                <var>
+                    <name>PSLASH</name>
+                    <val>xs:string (fn:concat ($P, '/'))</val>
+                </var>
+                <var>
+                    <name>PSHARP</name>
+                    <val>xs:string (fn:concat ($P, '#'))</val>
+                </var>
+                <var>
+                    <name>SIRI</name>
+                    <val>sem:iri (fn:concat ($PSHARP, fs:stand-id))</val>
+                </var>              
+            </vars>
+            <triples>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri('http://www.w3.org/2000/01/rdf-schema#a')</val>
+                    </predicate>
+                    <object>
+                        <val>sem:iri($P)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$FIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri('http://marklogic.com/sdmp/forest/has-unclosed-stand')</val>
+                    </predicate>
+                    <object>
+                        <val>$SIRI</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'stand-id')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:stand-id)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'path')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:string(fs:path)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'disk-size')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:disk-size)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'memory-size')</val>
+                    </predicate>
+                    <object>
+                        <val>xs:unsignedLong(fs:memory-size)</val>
+                    </object>
+                </triple>
+                <triple>
+                    <subject>
+                        <val>$SIRI</val>
+                    </subject>
+                    <predicate>
+                        <val>sem:iri($PSLASH||'has-reference')</val>
+                    </predicate>
+                    <object>
+                        <val>fn:exists (fs:reference)</val>
+                        <invalid-values>ignore</invalid-values>
+                    </object>
+                </triple>
+            </triples>
+        </template>
     </templates>
 </template>
