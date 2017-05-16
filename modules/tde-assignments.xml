@@ -164,7 +164,7 @@
     </triples>
     <templates>
         <template>
-            <context>a:forest-replicas</context>
+            <context>a:forest-replicas/a:forest-replica</context>
             <triples>
                 <triple>
                     <subject>
@@ -174,14 +174,14 @@
                         <val>sem:iri($PSLASH||'forest-replica')</val>
                     </predicate>
                     <object>
-                        <val>xs:unsignedLong(a:forest-replica)</val>
+                        <val>xs:unsignedLong(.)</val>
                         <invalid-values>ignore</invalid-values>
                     </object>
                 </triple>
             </triples>
         </template>
         <template>
-            <context>a:failover-hosts</context>
+            <context>a:failover-hosts/a:failover-host</context>
             <triples>
                 <triple>
                     <subject>
@@ -191,7 +191,7 @@
                         <val>sem:iri($PSLASH||'failover-host')</val>
                     </predicate>
                     <object>
-                        <val>xs:unsignedLong(a:failover-host)</val>
+                        <val>xs:unsignedLong(.)</val>
                         <invalid-values>ignore</invalid-values>
                     </object>
                 </triple>
