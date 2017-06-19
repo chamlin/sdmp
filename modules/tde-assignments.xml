@@ -7,21 +7,26 @@
     </path-namespaces>
     <context>/a:assignments/a:assignment</context>
     <vars>
+        <!-- b - base; p - prefix -->
         <var>
-            <name>P</name>
-            <val>xs:string ('http://marklogic.com/sdmp/forest')</val>
+            <name>B</name>
+            <val>xs:string ('http://marklogic.com/sdmp')</val>
         </var>
         <var>
-            <name>PSLASH</name>
-            <val>xs:string (fn:concat ($P, '/'))</val>
+            <name>BSLASH</name>
+            <val>xs:string (fn:concat ($B, '/'))</val>
         </var>
         <var>
-            <name>PSHARP</name>
-            <val>xs:string (fn:concat ($P, '#'))</val>
+            <name>F</name>
+            <val>xs:string (fn:concat ($B, '/forest'))</val>
+        </var>
+        <var>
+            <name>FSHARP</name>
+            <val>xs:string (fn:concat ($F, '#'))</val>
         </var>
         <var>
             <name>FIRI</name>
-            <val>sem:iri (fn:concat ($PSHARP, a:forest-id))</val>
+            <val>sem:iri (fn:concat ($FSHARP, a:forest-id))</val>
         </var>
     </vars>
     <triples>
@@ -33,7 +38,7 @@
                 <val>sem:iri('http://www.w3.org/2000/01/rdf-schema#a')</val>
             </predicate>
             <object>
-                <val>sem:iri($P)</val>
+                <val>sem:iri($F)</val>
             </object>
         </triple>
         <triple>
@@ -41,7 +46,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'forest-name')</val>
+                <val>sem:iri($BSLASH||'forestName')</val>
             </predicate>
             <object>
                 <val>xs:string(a:forest-name)</val>
@@ -52,7 +57,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'enabled')</val>
+                <val>sem:iri($BSLASH||'enabled')</val>
             </predicate>
             <object>
                 <val>xs:boolean(a:enabled)</val>
@@ -60,13 +65,13 @@
         </triple>
         <triple>
             <subject>
-                <val>$FIRI</val>
+                <val>sem:iri('http://marklogic.com/sdmp/host#'||xs:string(a:host))</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'host-id')</val>
+                <val>sem:iri($BSLASH||'hasForest')</val>
             </predicate>
             <object>
-                <val>xs:unsignedLong(a:host)</val>
+                <val>$FIRI</val>
             </object>
         </triple>
         <triple>
@@ -74,7 +79,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'data-directory')</val>
+                <val>sem:iri($BSLASH||'dataDirectory')</val>
             </predicate>
             <object>
                 <val>xs:string(a:data-directory)</val>
@@ -85,7 +90,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'large-data-directory')</val>
+                <val>sem:iri($BSLASH||'largeDataDirectory')</val>
             </predicate>
             <object>
                 <val>xs:string(a:large-data-directory)</val>
@@ -96,7 +101,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'fast-data-directory')</val>
+                <val>sem:iri($BSLASH||'fastDataDirectory')</val>
             </predicate>
             <object>
                 <val>xs:string(a:fast-data-directory)</val>
@@ -107,7 +112,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'updates-allowed')</val>
+                <val>sem:iri($BSLASH||'updatesAllowed')</val>
             </predicate>
             <object>
                 <val>xs:string(a:updates-allowed)</val>
@@ -118,7 +123,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'failover-enable')</val>
+                <val>sem:iri($BSLASH||'failoverEnable')</val>
             </predicate>
             <object>
                 <val>xs:boolean(a:failover-enable)</val>
@@ -130,7 +135,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'forest-id')</val>
+                <val>sem:iri($BSLASH||'forestId')</val>
             </predicate>
             <object>
                 <val>xs:unsignedLong(a:forest-id)</val>
@@ -141,7 +146,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'forest-backups')</val>
+                <val>sem:iri($BSLASH||'forestBackups')</val>
             </predicate>
             <object>
                 <val>xs:string(a:forest-backups)</val>
@@ -154,7 +159,7 @@
                 <val>$FIRI</val>
             </subject>
             <predicate>
-                <val>sem:iri($PSLASH||'database-replication')</val>
+                <val>sem:iri($BSLASH||'databaseReplication')</val>
             </predicate>
             <object>
                 <val>xs:string(a:database-replication)</val>
@@ -171,11 +176,11 @@
                         <val>$FIRI</val>
                     </subject>
                     <predicate>
-                        <val>sem:iri($PSLASH||'forest-replica')</val>
+                        <val>sem:iri($BSLASH||'hasReplica')</val>
                     </predicate>
                     <object>
-                        <val>xs:unsignedLong(.)</val>
-                        <invalid-values>ignore</invalid-values>
+                        <val>sem:iri($FSHARP||xs:string(.))</val>
+                        <!--<invalid-values>ignore</invalid-values>-->
                     </object>
                 </triple>
             </triples>
@@ -188,7 +193,7 @@
                         <val>$FIRI</val>
                     </subject>
                     <predicate>
-                        <val>sem:iri($PSLASH||'failover-host')</val>
+                        <val>sem:iri($BSLASH||'failoverHost')</val>
                     </predicate>
                     <object>
                         <val>xs:unsignedLong(.)</val>

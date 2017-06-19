@@ -1,0 +1,83 @@
+<template xmlns="http://marklogic.com/xdmp/tde">
+    <path-namespaces>
+        <path-namespace>
+            <prefix>h</prefix>
+            <namespace-uri>http://marklogic.com/xdmp/hosts</namespace-uri>
+        </path-namespace>
+    </path-namespaces>
+    <context>/h:hosts/h:host</context>
+    <vars>
+        <!-- b - base; p - prefix -->
+        <var>
+            <name>B</name>
+            <val>xs:string ('http://marklogic.com/sdmp')</val>
+        </var>
+        <var>
+            <name>BSLASH</name>
+            <val>xs:string (fn:concat ($B, '/'))</val>
+        </var>
+        <var>
+            <name>GIRI</name>
+            <val>sem:iri (fn:concat ($B, '/group#', xs:string (h:group)))</val>
+        </var>
+        <var>
+            <name>H</name>
+            <val>xs:string (fn:concat ($B, '/host'))</val>
+        </var>
+        <var>
+            <name>HSHARP</name>
+            <val>xs:string (fn:concat ($H, '#'))</val>
+        </var>
+        <var>
+            <name>HIRI</name>
+            <val>sem:iri (fn:concat ($HSHARP, h:host-id))</val>
+        </var>
+    </vars>
+<!-- TODO  lots!!!! -->
+    <triples>
+        <triple>
+            <subject>
+                <val>$HIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri('http://www.w3.org/2000/01/rdf-schema#a')</val>
+            </predicate>
+            <object>
+                <val>sem:iri($H)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$HIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($BSLASH||'hostName')</val>
+            </predicate>
+            <object>
+                <val>xs:string(h:host-name)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$HIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($BSLASH||'hostId')</val>
+            </predicate>
+            <object>
+                <val>xs:string(h:host-id)</val>
+            </object>
+        </triple>
+        <triple>
+            <subject>
+                <val>$GIRI</val>
+            </subject>
+            <predicate>
+                <val>sem:iri($BSLASH||'hasHost')</val>
+            </predicate>
+            <object>
+                <val>$HIRI</val>
+            </object>
+        </triple>
+    </triples>
+</template>
